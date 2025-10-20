@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessoires pour machines à coudre - M.N.FOURNITURES</title>
+    <style>
+        :root {
+            --primary-color: #003366; /* Bleu marine */
+            --secondary-color: #cc0000; /* Rouge */
+            --light-gray: #f5f5f5;
+            --dark-gray: #333333;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+            background-color: rgba(0, 51, 102, 0.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark-gray);
+            margin: 3px;
+            transition: var(--transition);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: var(--transition);
+            padding: 80px 20px 20px;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 15px;
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 600;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu a:hover {
+            background-color: rgba(0, 51, 102, 0.1);
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 15px 0;
+            background-color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            margin: 0 10px;
+            color: #999;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 40px 0;
+            background-color: var(--light-gray);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: var(--dark-gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Controls */
+        .controls {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .filter-group select, .filter-group input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .pagination button {
+            padding: 8px 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .pagination button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .pagination button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .page-info {
+            margin: 0 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-category {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .product-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            width: 100%;
+            text-align: center;
+        }
+
+        .product-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 40px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+
+        /* Overlay for mobile menu */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+                z-index: 1002;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-controls {
+                flex-direction: column;
+            }
+
+            .pagination {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="logo.png" alt="Logo M.N.FOURNITURES">
+                <span class="logo-text">M.N.FOURNITURES</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#a-propos">À propos</a></li>
+                    <li><a href="index.html#produits" class="active">Produits</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-close">&times;</div>
+        <ul>
+            <li><a href="mn1.html">Accueil</a></li>
+            <li><a href="index.html#a-propos">À propos</a></li>
+            <li><a href="index.html#produits">Produits</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="mn1.html">Accueil</a>
+            <span>&gt;</span>
+            <a href="index.html#produits">Produits</a>
+            <span>&gt;</span>
+            <span>Accessoires pour machines à coudre</span>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Accessoires pour machines à coudre</h1>
+            <p>Découvrez notre large gamme d'accessoires compatibles avec la plupart des machines à coudre domestiques et industrielles. Trouvez les outils dont vous avez besoin pour optimiser votre expérience de couture.</p>
+        </div>
+    </section>
+
+    <!-- Controls -->
+    <div class="container">
+        <div class="controls">
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label for="category">Catégorie</label>
+                    <select id="category">
+                        <option value="all">Toutes les catégories</option>
+                        <option value="aiguilles">Aiguilles</option>
+                        <option value="pieds">Pieds de biche</option>
+                        <option value="bobines">Bobines</option>
+                        <option value="housses">Housses et protections</option>
+                        <option value="outils">Outils</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sort">Trier par</label>
+                    <select id="sort">
+                        <option value="popularity">Popularité</option>
+                        <option value="price-low">Prix croissant</option>
+                        <option value="price-high">Prix décroissant</option>
+                        <option value="name">Nom A-Z</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="search">Rechercher</label>
+                    <input type="text" id="search" placeholder="Rechercher un accessoire...">
+                </div>
+            </div>
+            <div class="pagination">
+                <button id="prev-page" disabled>&lt; Précédent</button>
+                <span class="page-info">Page <span id="current-page">1</span> sur <span id="total-pages">5</span></span>
+                <button id="next-page">Suivant &gt;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="container">
+        <div class="products-grid" id="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card" data-category="aiguilles" data-price="12.50">
+                <div class="product-image">
+                    <img src="https://placehold.co/300x200/003366/ffffff?text=Aiguilles" alt="Aiguilles universelles">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Aiguilles</div>
+                    <h3 class="product-title">Aiguilles universelles (pack de 5)</h3>
+                    <p class="product-description">Aiguilles de qualité professionnelle pour tous types de tissus. Compatible avec la plupart des machines à coudre.</p>
+                    <div class="product-price"></div>
+                    <a href="#" class="product-btn">Voir les détails</a>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" data-category="pieds" data-price="24.99">
+                <div class="product-image">
+                    <img src="https://placehold.co/300x200/cc0000/ffffff?text=Pieds" alt="Pieds de biche">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Pieds de biche</div>
+                    <h3 class="product-title">Pied de biche standard</h3>
+                    <p class="product-description">Pied de biche universel pour couture droite et zigzag. Convient à la plupart des machines.</p>
+                    <div class="product-price"></div>
+                    <a href="#" class="product-btn">Voir les détails</a>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" data-category="bobines" data-price="8.99">
+                <div class="product-image">
+                    <img src="https://placehold.co/300x200/666666/ffffff?text=Bobines" alt="Bobines">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Bobines</div>
+                    <h3 class="product-title">Bobines en métal (lot de 10)</h3>
+                    <p class="product-description">Bobines en métal de haute qualité pour une tension constante du fil. Compatible avec la plupart des machines.</p>
+                    <div class="product-price"></div>
+                    <a href="#" class="product-btn">Voir les détails</a>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card" data-category="housses" data-price="35.00">
+                <div class="product-image">
+                    <img src="https://placehold.co/300x200/003366/ffffff?text=Housse" alt="Housse">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Housses et protections</div>
+                    <h3 class="product-title">Housse de protection pour machine à coudre</h3>
+                    <p class="product-description">Housse de protection en polyester résistant pour protéger votre machine contre la poussière.</p>
+                    <div class="product-price"></div>
+                    <a href="#" class="product-btn">Voir les détails</a>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card" data-category="outils" data-price="18.75">
+                <div class="product-image">
+                    <img src="https://placehold.co/300x200/cc0000/ffffff?text=Outils" alt="Outils">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Outils</div>
+                    <h3 class="product-title">Kit d'outils de couture</h3>
+                    <p class="product-description">Ensemble d'outils essentiels : découseur, pique-épingles, aiguilles, ciseaux et plus encore.</p>
+                    <div class="product-price"></div>
+                    <a href="#" class="product-btn">Voir les détails</a>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card" data-category="aiguilles" data-price="15.99">
+                <div class="product-image">
+                    <img src="https://placehold.co/300x200/666666/ffffff?text=Aiguilles" alt="Aiguilles">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Aiguilles</div>
+                    <h3 class="product-title">Aiguilles à bout rond (pack de 10)</h3>
+                    <p class="product-description">Aiguilles spéciales pour tissus élastiques et tricot. Bout rond pour éviter les déchirures.</p>
+                    <div class="product-price"></div>
+                    <a href="#" class="product-btn">Voir les détails</a>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card" data-category="pieds" data-price="29.99">
+                <div class="product-image">
+                    <img src="https://placehold.co/300x200/003366/ffffff?text=Pieds" alt="Pieds">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Pieds de biche</div>
+                    <h3 class="product-title">Pied de biche pour zip</h3>
+                    <p class="product-description">Pied spécial pour poser les fermetures éclair avec précision. Convient aux machines à coudre standard.</p>
+                    <div class="product-price"></div>
+                    <a href="#" class="product-btn">Voir les détails</a>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card" data-category="bobines" data-price="12.50">
+                <div class="product-image">
+                    <img src="https://placehold.co/300x200/cc0000/ffffff?text=Bobines" alt="Bobines">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Bobines</div>
+                    <h3 class="product-title">Bobines en plastique (lot de 20)</h3>
+                    <p class="product-description">Bobines en plastique léger pour une utilisation quotidienne. Idéales pour les projets de couture.</p>
+                    <div class="product-price"></div>
+                    <a href="#" class="product-btn">Voir les détails</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>M.N.FOURNITURES</h3>
+                    <p>Votre partenaire de confiance pour toutes vos fournitures textiles et machines à coudre depuis 2008.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">t</a>
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Liens rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#a-propos">À propos</a></li>
+                        <li><a href="index.html#produits">Produits</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="#">Politique de confidentialité</a></li>
+                        <li><a href="#">Conditions générales</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Catégories</h3>
+                    <ul class="footer-links">
+                        <li><a href="accessoires.html">Accessoires pour machines à coudre</a></li>
+                        <li><a href="pieces.html">Pièces de rechange</a></li>
+                        <li><a href="fournitures.html">Fournitures de confection</a></li>
+                        <li><a href="emballage.html">Matériel d'emballage</a></li>
+                        <li><a href="scotch.html">Scotch adhésif</a></li>
+                        <li><a href="#">Outils de couture</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Inscrivez-vous pour recevoir nos dernières offres et actualités.</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" placeholder="Votre email" class="form-input" style="margin-bottom: 10px;">
+                        </div>
+                        <button type="submit" class="submit-btn" style="width: auto; padding: 8px 16px;">S'abonner</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 M.N.FOURNITURES. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        const overlay = document.querySelector('.overlay');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', openMobileMenu);
+        }
+
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', closeMobileMenu);
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', closeMobileMenu);
+        }
+
+        // Close menu when clicking on links
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Pagination functionality
+        const productsGrid = document.getElementById('products-grid');
+        const prevPageBtn = document.getElementById('prev-page');
+        const nextPageBtn = document.getElementById('next-page');
+        const currentPageSpan = document.getElementById('current-page');
+        const totalPagesSpan = document.getElementById('total-pages');
+
+        // Set total pages (in a real app, this would come from your data)
+        totalPagesSpan.textContent = '4';
+        let currentPage = 1;
+        const productsPerPage = 8;
+
+        // Update pagination display
+        function updatePagination() {
+            currentPageSpan.textContent = currentPage;
+            prevPageBtn.disabled = currentPage === 1;
+            nextPageBtn.disabled = currentPage === 4; // Total pages
+        }
+
+        // Initial pagination setup
+        updatePagination();
+
+        // Pagination event listeners
+        prevPageBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePagination();
+                filterAndSortProducts();
+            }
+        });
+
+        nextPageBtn.addEventListener('click', () => {
+            if (currentPage < 4) { // Total pages
+                currentPage++;
+                updatePagination();
+                filterAndSortProducts();
+            }
+        });
+
+        // Filter and sort functionality
+        const categoryFilter = document.getElementById('category');
+        const sortSelect = document.getElementById('sort');
+        const searchInput = document.getElementById('search');
+
+        // Store original products
+        const originalProducts = Array.from(productsGrid.children);
+
+        function filterAndSortProducts() {
+            // Get filter values
+            const selectedCategory = categoryFilter.value;
+            const sortValue = sortSelect.value;
+            const searchTerm = searchInput.value.toLowerCase();
+
+            // Filter products
+            let filteredProducts = originalProducts.filter(product => {
+                const category = product.getAttribute('data-category');
+                const title = product.querySelector('.product-title').textContent.toLowerCase();
+                const description = product.querySelector('.product-description').textContent.toLowerCase();
+                
+                const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
+                const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                
+                return matchesCategory && matchesSearch;
+            });
+
+            // Sort products
+            filteredProducts.sort((a, b) => {
+                const priceA = parseFloat(a.getAttribute('data-price'));
+                const priceB = parseFloat(b.getAttribute('data-price'));
+                const titleA = a.querySelector('.product-title').textContent;
+                const titleB = b.querySelector('.product-title').textContent;
+
+                switch(sortValue) {
+                    case 'price-low':
+                        return priceA - priceB;
+                    case 'price-high':
+                        return priceB - priceA;
+                    case 'name':
+                        return titleA.localeCompare(titleB);
+                    case 'popularity':
+                    default:
+                        // For demo, we'll just return a random order
+                        return 0.5 - Math.random();
+                }
+            });
+
+            // Calculate pagination
+            const startIndex = (currentPage - 1) * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
+
+            // Update grid
+            productsGrid.innerHTML = '';
+            paginatedProducts.forEach(product => {
+                productsGrid.appendChild(product.cloneNode(true));
+            });
+
+            // Update pagination
+            const totalPages = Math.ceil(filteredProducts.length / productsPerPage) || 1;
+            totalPagesSpan.textContent = totalPages;
+            updatePagination();
+        }
+
+        // Add event listeners to filters
+        categoryFilter.addEventListener('change', () => {
+            currentPage = 1;
+            filterAndSortProducts();
+        });
+
+        sortSelect.addEventListener('change', () => {
+            currentPage = 1;
+            filterAndSortProducts();
+        });
+
+        searchInput.addEventListener('input', () => {
+            currentPage = 1;
+            filterAndSortProducts();
+        });
+
+        // Initialize the product grid
+        filterAndSortProducts();
+
+        // Navigation active link
+        document.querySelectorAll('nav a').forEach(link => {
+            if (link.getAttribute('href') === 'accessoires.html') {
+                link.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
+
